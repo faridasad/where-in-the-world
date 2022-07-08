@@ -12,24 +12,12 @@ const Container = styled.div`
 `
 
 
-const Countries = () => {
-
-    const [items, setItems] = useState([])
-
-    useEffect(() => {
-        fetch("https://restcountries.com/v3.1/all")
-            .then(res => res.json())
-            .then(data => setItems(data))
-
-
-    }, [])
-
-    
+const Countries = ({countries}) => {
 
   return (
     <Container>
        {
-        items.map((item, key)=> {
+        countries.map((item, key)=> {
             return <Country 
                 key={key}
                 link={item.flags.png}
