@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -7,6 +8,7 @@ const Container = styled.div`
     flex-direction: column;
     gap: 1em;
     border-radius: 7px;
+    cursor: pointer;
 `
 
 const Image = styled.img`
@@ -48,17 +50,20 @@ const DescData = styled.p`
     font-size: 12px;
 `
 
-const Country = ({link, name, population, region, capital}) => {
+const Country = ({id, link, name, population, region, capital, query}) => {
+
   return (
-    <Container>
-        <Image src={link}/>
-        <DescriptionContainer>
-            <CountryName>{name}</CountryName>
-            <DescLine><DescHeader>Population: </DescHeader><DescData> {population}</DescData></DescLine>
-            <DescLine><DescHeader>Region: </DescHeader><DescData> {region}</DescData></DescLine>
-            <DescLine><DescHeader>Capital: </DescHeader><DescData> {capital}</DescData></DescLine>
-        </DescriptionContainer>
-    </Container>
+    <Link to={`/countries/${id}`}>
+        <Container>
+            <Image src={link}/>
+            <DescriptionContainer>
+                <CountryName>{name}</CountryName>
+                <DescLine><DescHeader>Population: </DescHeader><DescData> {population}</DescData></DescLine>
+                <DescLine><DescHeader>Region: </DescHeader><DescData> {region}</DescData></DescLine>
+                <DescLine><DescHeader>Capital: </DescHeader><DescData> {capital}</DescData></DescLine>
+            </DescriptionContainer>
+        </Container>
+    </Link>
   )
 }
 

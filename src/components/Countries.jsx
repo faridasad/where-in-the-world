@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import Country from './Country'
 
@@ -12,13 +12,15 @@ const Container = styled.div`
 `
 
 
-const Countries = ({countries}) => {
+const Countries = ({countries, query}) => {
 
   return (
     <Container>
        {
         countries.map((item, key)=> {
-            return <Country 
+            return <Country
+                id={item.idd.root}
+                query={query}
                 key={key}
                 link={item.flags.png}
                 name={item.name.common}
