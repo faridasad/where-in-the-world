@@ -1,23 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import Home from "./pages/Home";
-import { BrowserRouter as Router, Routes, Route,} from "react-router-dom";
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.css";
 import SingleCountry from "./pages/SingleCountry";
+import Error from "./pages/Error";
 
-export const MainContext = React.createContext()
+export const MainContext = React.createContext();
 
 function App() {
-
-  const [items, setItems] = useState([])
-  const [theme, setTheme] = useState("light")
+  const [items, setItems] = useState([]);
+  const [theme, setTheme] = useState("light");
 
   const data = {
     items,
     setItems,
     theme,
     setTheme,
-  }
-
+  };
 
   return (
     <div className="App">
@@ -25,7 +24,8 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route exact path="countries/:id" element={<SingleCountry />} />
+            <Route path="countries/:id" element={<SingleCountry />} />
+            <Route path="*" element={<Error />} />
           </Routes>
         </Router>
       </MainContext.Provider>
