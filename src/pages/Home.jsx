@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { MainContext } from "../App";
 import Countries from "../components/Countries";
 import Header from "../components/Header";
 import Search from "../components/Search";
-import SingleCountry from "./SingleCountry";
 
-export const ItemsContext = React.createContext()
 
 const Home = () => {
-    const [items, setItems] = useState([]);
     const [input, setInput] = useState("");
     const [query, setQuery] = useState("");
-    const [region, setRegion] = useState("")
+    const [region, setRegion] = useState("");
   
+
+    const {items, setItems} = useContext(MainContext)
+
     
   useEffect(() => {
     const showAll = async () => {
@@ -45,7 +45,6 @@ const Home = () => {
 
   return (
     <>
-    <ItemsContext.Provider value={items}>
         <Header />
         <Search
         inputValue={input}
@@ -57,7 +56,6 @@ const Home = () => {
         handleRegionChange={(e) => {setRegion(e.target.value)}}
         />
         <Countries countries={items} query={query} />
-    </ItemsContext.Provider>
     </>
   )
 }

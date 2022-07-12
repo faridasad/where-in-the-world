@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Container = styled.div`
-    width: 300px;
+    width: 299px;
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -13,14 +13,14 @@ const Container = styled.div`
 
 const Image = styled.img`
     object-fit: cover;
-    aspect-ratio: 2 / 1;
-    flex: 1;
+    width: 299px;
+    height: 150px;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
 `
 
 const DescriptionContainer = styled.div`
-    flex: 1;
+    height: 150px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -28,6 +28,7 @@ const DescriptionContainer = styled.div`
     padding-left: 1em;
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
+
 `
 
 const CountryName = styled.p`
@@ -50,11 +51,11 @@ const DescData = styled.p`
     font-size: 12px;
 `
 
-const Country = ({id, link, name, population, region, capital, query}) => {
+const Country = ({link, name, population, region, capital}) => {
 
   return (
-    <Link to={`/countries/${id}`}>
-        <Container>
+    <Link to={`/countries/${name}`}>
+        <Container className='country-con'>
             <Image src={link}/>
             <DescriptionContainer>
                 <CountryName>{name}</CountryName>

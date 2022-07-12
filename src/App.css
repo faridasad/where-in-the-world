@@ -65,14 +65,14 @@ svg {
 
 
 .App {
-  height: 100vh;
-  padding: 0 4em;
   display: flex;
   align-items: center;
   flex-direction: column;
   font-family: 'Nunito Sans', sans-serif;
   gap: 4em;
 }
+
+
 
 a{
   text-decoration: none;

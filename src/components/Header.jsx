@@ -1,15 +1,20 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components'
-import {DarkModeOutlined} from '@mui/icons-material';
+import { Link } from 'react-router-dom'
+import { DarkModeOutlined, DarkMode } from '@mui/icons-material';
+import { MainContext } from '../App';
+import { ThemeProvider } from 'styled-components';
+
+import { lightTheme, darkTheme, GlobalStyles } from '../theme';
 
 
 const HeaderContainer = styled.div`
+    padding: 0 4em;
     height: 70px;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 2em;
 `
 
 const HeaderText = styled.h1`
@@ -17,7 +22,9 @@ const HeaderText = styled.h1`
     font-weight: 800;
 `
 
-const ToggleContainer = styled.div`
+const ToggleButton = styled.button`
+    background: transparent;
+    border: none;
     display: flex;
     align-items: center;
     gap: .5em;
@@ -28,11 +35,39 @@ const ToggleContainer = styled.div`
 `
 
 const Header = () => {
+
+  const {theme, setTheme} = useContext(MainContext)
+  const isDarkTheme = theme === "dark"
+
+  const toggleTheme = () => {
+    const updatedTheme = isDarkTheme ? "light" : "dark";
+    setTheme(updatedTheme);
+    localStorage.setItem("theme", updatedTheme);
+  };
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (savedTheme && ["dark", "light"].includes(savedTheme)) {
+      setTheme(savedTheme);
+    } else if (prefersDark) {
+      setTheme("dark");
+    }
+  }, [theme]);
+
+
+
   return (
-    <HeaderContainer>
-        <HeaderText>Where in the world?</HeaderText>
-        <ToggleContainer><DarkModeOutlined /> Dark Mode</ToggleContainer>
-    </HeaderContainer>
+    <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
+      <HeaderContainer className='header-con'>
+        <GlobalStyles />
+        <Link to="/">
+          <HeaderText>Where in the world?</HeaderText>
+        </Link>
+          <ToggleButton className="toggle-con" onClick={() => setTheme(toggleTheme)}>{isDarkTheme ? <DarkMode /> : <DarkModeOutlined />} Dark Mode</ToggleButton>
+      </HeaderContainer>
+    </ThemeProvider>
   )
 }
 

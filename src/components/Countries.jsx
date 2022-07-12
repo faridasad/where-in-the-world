@@ -8,7 +8,8 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 2em;
+    gap: 4em;
+    padding: 0 4em;
 `
 
 
@@ -19,7 +20,6 @@ const Countries = ({countries, query}) => {
        {
         countries.map((item, key)=> {
             return <Country
-                id={item.idd.root}
                 query={query}
                 key={key}
                 link={item.flags.png}
