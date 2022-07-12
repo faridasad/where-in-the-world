@@ -18,6 +18,7 @@ const HeaderText = styled.h1`
   font-weight: 800;
   font-size: 3em;
 
+  
   @media screen and (max-width: 350px) {
     font-size: 2em;
   }
