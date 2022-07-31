@@ -55,7 +55,6 @@ const Search = ({
   regionValue,
   handleRegionChange,
 }) => {
-  console.log("search rendered")
   return (
     <SearchContainer>
       <InputContainer

@@ -38,7 +38,6 @@ const ToggleButton = styled.button`
 `;
 
 const Header = () => {
-  console.log("header rendered")
   const { theme, setTheme } = useContext(MainContext);
   const isDarkTheme = theme === "dark";
 

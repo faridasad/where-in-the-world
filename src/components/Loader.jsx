@@ -8,4 +8,6 @@ const Loader = () => {
   return <LoaderContainer className="lds-dual-ring" />;
 };
 
+
 export default memo(Loader);
+
