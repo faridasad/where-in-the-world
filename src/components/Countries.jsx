@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import styled from "styled-components";
 import Country from "./Country";
 
@@ -13,6 +13,7 @@ const Container = styled.div`
 `;
 
 const Countries = ({ countries, query }) => {
+  console.log("countries rendered")
   return (
     <Container>
       {countries.map((item, key) => {
@@ -32,4 +33,4 @@ const Countries = ({ countries, query }) => {
   );
 };
 
-export default Countries;
+export default memo(Countries);

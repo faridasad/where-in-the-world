@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, memo } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { DarkModeOutlined, DarkMode } from "@mui/icons-material";
@@ -38,6 +38,7 @@ const ToggleButton = styled.button`
 `;
 
 const Header = () => {
+  console.log("header rendered")
   const { theme, setTheme } = useContext(MainContext);
   const isDarkTheme = theme === "dark";
 
@@ -77,4 +78,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);

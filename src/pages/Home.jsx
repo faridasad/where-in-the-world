@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, memo } from "react";
 import { MainContext } from "../App";
 import Countries from "../components/Countries";
 import Header from "../components/Header";
@@ -62,4 +62,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default memo(Home);

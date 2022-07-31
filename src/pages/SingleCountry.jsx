@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, memo } from "react";
 import Header from "../components/Header";
 import { KeyboardBackspace } from "@mui/icons-material";
 import styled from "styled-components";
@@ -184,4 +184,4 @@ const SingleCountry = () => {
   );
 };
 
-export default SingleCountry;
+export default memo(SingleCountry);

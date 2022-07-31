@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import styled from "styled-components";
 import { SearchOutlined } from "@mui/icons-material";
 
@@ -55,6 +55,7 @@ const Search = ({
   regionValue,
   handleRegionChange,
 }) => {
+  console.log("search rendered")
   return (
     <SearchContainer>
       <InputContainer
@@ -87,4 +88,4 @@ const Search = ({
   );
 };
 
-export default Search;
+export default memo(Search);
