@@ -10,6 +10,7 @@ const SearchContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 1em;
+  transition: .3s all;
 
   @media screen and (max-width: 800px) {
     flex-direction: column;
@@ -35,6 +36,7 @@ const Input = styled.input`
   border: none;
   padding: 0.9em 0;
   padding-right: 4em;
+  transition: .3s all;
   @media screen and (max-width: 350px) {
     width: 60%;
   }

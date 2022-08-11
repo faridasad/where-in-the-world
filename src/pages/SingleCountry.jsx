@@ -19,6 +19,12 @@ const BackButton = styled.button`
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    transition: .3s all;
+
+  @media screen and (max-width: 800px) {
+    padding: 0.25em .5em;
+    margin-left: 1em;
+  }
 `;
 
 const CountryContainer = styled.div`
@@ -30,6 +36,11 @@ const CountryContainer = styled.div`
   flex-wrap: wrap;
   gap: 7em;
   padding-bottom: 15em;
+  transition: .3s all;
+
+  @media screen and (max-width: 800px) {
+    padding: 0 1em;
+  }
 `;
 
 const Image = styled.img`

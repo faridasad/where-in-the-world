@@ -14,6 +14,8 @@ const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: .3s all;
+
 
   @media screen and (max-width: 800px) {
     padding: 0 1em;
