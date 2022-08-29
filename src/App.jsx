@@ -23,9 +23,11 @@ function App() {
       <MainContext.Provider value={data}>
         <Router>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="countries/:id" element={<SingleCountry />} />
-            <Route path="*" element={<Error />} />
+            <Route path="/">
+              <Route index element={<Home />} />
+              <Route path="countries/:id" element={<SingleCountry />} />
+              <Route path="*" element={<Error />} />
+            </Route>
           </Routes>
         </Router>
       </MainContext.Provider>
