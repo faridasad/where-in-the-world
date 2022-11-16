@@ -1,4 +1,4 @@
-import React, { useContext, memo } from "react";
+import React, { useState, useEffect, useContext, memo } from "react";
 import Header from "../components/Header";
 import { KeyboardBackspace } from "@mui/icons-material";
 import styled from "styled-components";
@@ -109,7 +109,19 @@ const Bold = styled.p`
 const SingleCountry = () => {
   const { id } = useParams();
   const { items } = useContext(MainContext);
-  const item = items.find((i) => i.name.common === id);
+  const [country, setCountry] = useState();
+
+  
+  useEffect(() => {
+    const getCountry = async () => {
+      await fetch(`https://restcountries.com/v3.1/name/${id}`)
+        .then((res) => res.json())
+        .then((data) => setCountry(data));
+    }
+    getCountry();
+  }, []);
+
+  console.log(country);
 
   return (
     <Container>
@@ -127,69 +139,69 @@ const SingleCountry = () => {
           <KeyboardBackspace /> Back
         </Link>
       </BackButton>
-      {item && (
+      {country && (
         <CountryContainer>
-          <Image src={item.flags.png} />
-          <DetailsContainer>
-            <Name>{item.name.common}</Name>
-            <Details>
-              <List>
-                <ListItem>
-                  <Bold>Native Name: </Bold>
-                  {Object.entries(item.name.nativeName)[0][1].official}
-                </ListItem>
-                <ListItem>
-                  <Bold>Population: </Bold>{" "}
-                  {item.population
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-                </ListItem>
-                <ListItem>
-                  <Bold>Region: </Bold> {item.region}
-                </ListItem>
-                <ListItem>
-                  <Bold>Sub Region: </Bold> {item.subregion}
-                </ListItem>
-                <ListItem>
-                  <Bold>Capital: </Bold> {item.capital}
-                </ListItem>
-              </List>
-              <List>
-                <ListItem>
-                  <Bold>Top Level Domain: </Bold> {item.tld}
-                </ListItem>
-                <ListItem>
-                  <Bold>Currencies: </Bold>
-                  {Object.entries(item.currencies).map((c, index) => {
-                    return <span key={index}>{c[1].name} | </span>;
-                  })}
-                </ListItem>
-                <ListItem>
-                  <Bold>Languages: </Bold>
-                  {Object.entries(item.languages).map((l, index) => {
-                    l.shift();
-                    return <span key={index}>{l[0]} |</span>;
-                  })}
-                </ListItem>
-              </List>
-            </Details>
-            <BordersContainer>
-              <BorderText>Border Countries: </BorderText>
-              {!item.borders ? (
-                <BorderSpan className="border-con">Not any borders</BorderSpan>
-              ) : (
-                Object.entries(item.borders).map((b, index) => {
-                  b.shift();
-                  return (
-                    <BorderSpan className="border-con" key={index}>
-                      {b[0]}
-                    </BorderSpan>
-                  );
-                })
-              )}
-            </BordersContainer>
-          </DetailsContainer>
-        </CountryContainer>
+        <Image src={country[0].flags.png} />
+        <DetailsContainer>
+          <Name>{country[0].name.common}</Name>
+          <Details>
+            <List>
+              <ListItem>
+                <Bold>Native Name: </Bold>
+                {Object.entries(country[0].name.nativeName)[0][1].official}
+              </ListItem>
+              <ListItem>
+                <Bold>Population: </Bold>{" "}
+                {country[0].population
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+              </ListItem>
+              <ListItem>
+                <Bold>Region: </Bold> {country[0].region}
+              </ListItem>
+              <ListItem>
+                <Bold>Sub Region: </Bold> {country[0].subregion}
+              </ListItem>
+              <ListItem>
+                <Bold>Capital: </Bold> {country[0].capital}
+              </ListItem>
+            </List>
+            <List>
+              <ListItem>
+                <Bold>Top Level Domain: </Bold> {country[0].tld}
+              </ListItem>
+              <ListItem>
+                <Bold>Currencies: </Bold>
+                {Object.entries(country[0].currencies).map((c, index) => {
+                  return <span key={index}>{c[1].name} | </span>;
+                })}
+              </ListItem>
+              <ListItem>
+                <Bold>Languages: </Bold>
+                {Object.entries(country[0].languages).map((l, index) => {
+                  l.shift();
+                  return <span key={index}>{l[0]} |</span>;
+                })}
+              </ListItem>
+            </List>
+          </Details>
+          <BordersContainer>
+            <BorderText>Border Countries: </BorderText>
+            {!country[0].borders ? (
+              <BorderSpan className="border-con">Not any borders</BorderSpan>
+            ) : (
+              Object.entries(country[0].borders).map((b, index) => {
+                b.shift();
+                return (
+                  <BorderSpan className="border-con" key={index}>
+                    {b[0]}
+                  </BorderSpan>
+                );
+              })
+            )}
+          </BordersContainer>
+        </DetailsContainer>
+      </CountryContainer>
       )}
     </Container>
   );
