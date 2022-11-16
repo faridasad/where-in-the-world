@@ -21,27 +21,14 @@ const Home = () => {
 
       setIsLoaded(!isLoaded);
     };
+    showAll();
+  }, []);
 
-    const fetchCountries = async () => {
-      await fetch(`https://restcountries.com/v3.1/name/${query}`)
-        .then((res) => res.json())
-        .then((data) => {
-          data.status == 404 ? console.log("erorrr") : setItems(data);
-        });
-    };
-    query.length === 0 ? showAll() : fetchCountries();
-  }, [query]);
+  const filteredCountries = items.filter((item) => {
+    return item.name.common.toLowerCase().includes(query.toLowerCase()) && item.region.toLowerCase().includes(region.toLowerCase());
+  });
 
-  useEffect(() => {
-    const fetchCountriesbyFilter = async () => {
-      await fetch(`https://restcountries.com/v3.1/region/${region}`)
-        .then((res) => res.json())
-        .then((data) => {
-          data.status == 404 ? console.log("erorrr") : setItems(data);
-        });
-    };
-    region.length !== 0 && fetchCountriesbyFilter();
-  }, [region]);
+
 
   return (
     <>
@@ -57,7 +44,7 @@ const Home = () => {
           setRegion(e.target.value);
         }}
       />
-      {!isLoaded ? <Loader /> : <Countries countries={items} query={query} />}
+      {!isLoaded ? <Loader /> : <Countries countries={filteredCountries} query={query} />}
     </>
   );
 };
