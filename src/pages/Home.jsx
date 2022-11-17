@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, memo } from "react";
+import React, { useState, useEffect, useContext, useMemo, memo } from "react";
 import { MainContext } from "../App";
 import Countries from "../components/Countries";
 import Header from "../components/Header";
@@ -24,11 +24,14 @@ const Home = () => {
     showAll();
   }, []);
 
-  const filteredCountries = items.filter((item) => {
-    return item.name.common.toLowerCase().includes(query.toLowerCase()) && item.region.toLowerCase().includes(region.toLowerCase());
-  });
-
-
+  const filteredCountries = useMemo(() => {
+    return items.filter((item) => {
+      return (
+        item.name.common.toLowerCase().includes(query.toLowerCase()) &&
+        item.region.toLowerCase().includes(region.toLowerCase())
+      );
+    });
+  }, [items, query, region]);
 
   return (
     <>
@@ -44,7 +47,11 @@ const Home = () => {
           setRegion(e.target.value);
         }}
       />
-      {!isLoaded ? <Loader /> : <Countries countries={filteredCountries} query={query} />}
+      {!isLoaded ? (
+        <Loader />
+      ) : (
+        <Countries countries={filteredCountries} query={query} />
+      )}
     </>
   );
 };
